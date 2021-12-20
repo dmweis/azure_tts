@@ -152,31 +152,51 @@ pub enum AudioFormat {
 impl AudioFormat {
     fn as_string(&self) -> String {
         match self {
-            audio_16khz_128kbitrate_mono_mp3 => String::from("audio-16khz-128kbitrate-mono-mp3"),
-            audio_16khz_32kbitrate_mono_mp3 => String::from("audio-16khz-32kbitrate-mono-mp3"),
-            audio_16khz_64kbitrate_mono_mp3 => String::from("audio-16khz-64kbitrate-mono-mp3"),
-            audio_24khz_160kbitrate_mono_mp3 => String::from("audio-24khz-160kbitrate-mono-mp3"),
-            audio_24khz_48kbitrate_mono_mp3 => String::from("audio-24khz-48kbitrate-mono-mp3"),
-            audio_24khz_96kbitrate_mono_mp3 => String::from("audio-24khz-96kbitrate-mono-mp3"),
-            audio_48khz_192kbitrate_mono_mp3 => String::from("audio-48khz-192kbitrate-mono-mp3"),
-            audio_48khz_96kbitrate_mono_mp3 => String::from("audio-48khz-96kbitrate-mono-mp3"),
-            ogg_16khz_16bit_mono_opus => String::from("ogg-16khz-16bit-mono-opus"),
-            ogg_24khz_16bit_mono_opus => String::from("ogg-24khz-16bit-mono-opus"),
-            ogg_48khz_16bit_mono_opus => String::from("ogg-48khz-16bit-mono-opus"),
-            raw_16khz_16bit_mono_pcm => String::from("raw-16khz-16bit-mono-pcm"),
-            raw_16khz_16bit_mono_truesilk => String::from("raw-16khz-16bit-mono-truesilk"),
-            raw_24khz_16bit_mono_pcm => String::from("raw-24khz-16bit-mono-pcm"),
-            raw_24khz_16bit_mono_truesilk => String::from("raw-24khz-16bit-mono-truesilk"),
-            raw_48khz_16bit_mono_pcm => String::from("raw-48khz-16bit-mono-pcm"),
-            raw_8khz_8bit_mono_alaw => String::from("raw-8khz-8bit-mono-alaw"),
-            raw_8khz_8bit_mono_mulaw => String::from("raw-8khz-8bit-mono-mulaw"),
-            riff_16khz_16bit_mono_pcm => String::from("riff-16khz-16bit-mono-pcm"),
-            riff_24khz_16bit_mono_pcm => String::from("riff-24khz-16bit-mono-pcm"),
-            riff_48khz_16bit_mono_pcm => String::from("riff-48khz-16bit-mono-pcm"),
-            riff_8khz_8bit_mono_alaw => String::from("riff-8khz-8bit-mono-alaw"),
-            riff_8khz_8bit_mono_mulaw => String::from("riff-8khz-8bit-mono-mulaw"),
-            webm_16khz_16bit_mono_opus => String::from("webm-16khz-16bit-mono-opus"),
-            webm_24khz_16bit_mono_opus => String::from("webm-24khz-16bit-mono-opus"),
+            AudioFormat::audio_16khz_128kbitrate_mono_mp3 => {
+                String::from("audio-16khz-128kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_16khz_32kbitrate_mono_mp3 => {
+                String::from("audio-16khz-32kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_16khz_64kbitrate_mono_mp3 => {
+                String::from("audio-16khz-64kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_24khz_160kbitrate_mono_mp3 => {
+                String::from("audio-24khz-160kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_24khz_48kbitrate_mono_mp3 => {
+                String::from("audio-24khz-48kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_24khz_96kbitrate_mono_mp3 => {
+                String::from("audio-24khz-96kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_48khz_192kbitrate_mono_mp3 => {
+                String::from("audio-48khz-192kbitrate-mono-mp3")
+            }
+            AudioFormat::audio_48khz_96kbitrate_mono_mp3 => {
+                String::from("audio-48khz-96kbitrate-mono-mp3")
+            }
+            AudioFormat::ogg_16khz_16bit_mono_opus => String::from("ogg-16khz-16bit-mono-opus"),
+            AudioFormat::ogg_24khz_16bit_mono_opus => String::from("ogg-24khz-16bit-mono-opus"),
+            AudioFormat::ogg_48khz_16bit_mono_opus => String::from("ogg-48khz-16bit-mono-opus"),
+            AudioFormat::raw_16khz_16bit_mono_pcm => String::from("raw-16khz-16bit-mono-pcm"),
+            AudioFormat::raw_16khz_16bit_mono_truesilk => {
+                String::from("raw-16khz-16bit-mono-truesilk")
+            }
+            AudioFormat::raw_24khz_16bit_mono_pcm => String::from("raw-24khz-16bit-mono-pcm"),
+            AudioFormat::raw_24khz_16bit_mono_truesilk => {
+                String::from("raw-24khz-16bit-mono-truesilk")
+            }
+            AudioFormat::raw_48khz_16bit_mono_pcm => String::from("raw-48khz-16bit-mono-pcm"),
+            AudioFormat::raw_8khz_8bit_mono_alaw => String::from("raw-8khz-8bit-mono-alaw"),
+            AudioFormat::raw_8khz_8bit_mono_mulaw => String::from("raw-8khz-8bit-mono-mulaw"),
+            AudioFormat::riff_16khz_16bit_mono_pcm => String::from("riff-16khz-16bit-mono-pcm"),
+            AudioFormat::riff_24khz_16bit_mono_pcm => String::from("riff-24khz-16bit-mono-pcm"),
+            AudioFormat::riff_48khz_16bit_mono_pcm => String::from("riff-48khz-16bit-mono-pcm"),
+            AudioFormat::riff_8khz_8bit_mono_alaw => String::from("riff-8khz-8bit-mono-alaw"),
+            AudioFormat::riff_8khz_8bit_mono_mulaw => String::from("riff-8khz-8bit-mono-mulaw"),
+            AudioFormat::webm_16khz_16bit_mono_opus => String::from("webm-16khz-16bit-mono-opus"),
+            AudioFormat::webm_24khz_16bit_mono_opus => String::from("webm-24khz-16bit-mono-opus"),
         }
     }
 }
