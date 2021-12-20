@@ -14,7 +14,7 @@ async fn main() {
         Microsoft Speech Service Text-to-Speech API
 </voice></speak>";
     let _res = client
-        .convert(
+        .synthesize_raw_text(
             ssml.to_owned(),
             azure_tts::AudioFormat::Audio48khz192kbitrateMonoMp3,
         )

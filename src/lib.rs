@@ -1,4 +1,7 @@
+mod ssml_serializer;
+
 use serde::{Deserialize, Serialize};
+pub use ssml_serializer::Speak;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -41,7 +44,11 @@ impl VoiceService {
         Ok(response)
     }
 
-    pub async fn convert(&self, text: String, audio_format: AudioFormat) -> Result<bytes::Bytes> {
+    pub async fn synthesize_raw_text(
+        &self,
+        text: String,
+        audio_format: AudioFormat,
+    ) -> Result<bytes::Bytes> {
         let endpoint = format!(
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
             self.service_region
