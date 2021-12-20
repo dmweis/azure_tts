@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["azure_tts"] = [{"text":"impl <a class=\"trait\" href=\"https://docs.rs/serde/1.0.132/serde/ser/trait.Serialize.html\" title=\"trait serde::ser::Serialize\">Serialize</a> for <a class=\"enum\" href=\"azure_tts/enum.VoiceGender.html\" title=\"enum azure_tts::VoiceGender\">VoiceGender</a>","synthetic":false,"types":["azure_tts::VoiceGender"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
