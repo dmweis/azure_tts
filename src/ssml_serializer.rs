@@ -1,27 +1,34 @@
+/// Very simple ssml serializer. Currently only supports single voice selection.
+use crate::{types::VoiceGender, VoiceSettings};
 use serde::Serialize;
 
 #[derive(Debug, Serialize, PartialEq)]
+#[serde(rename = "speak")]
 pub struct Speak {
-    version: f32,
+    // Needs decimal numbers
+    version: &'static str,
     #[serde(rename = "xml:lang")]
     xml_lang: String,
     voice: Voice,
 }
 
 impl Speak {
-    pub fn with_single_voice(language: &str, gender: &str, voice_name: &str, text: &str) -> Self {
+    pub fn new(language: &str, gender: VoiceGender, voice_name: &str, text: &str) -> Self {
         let voice = Voice {
             xml_lang: language.to_owned(),
-            xml_gender: gender.to_owned(),
+            xml_gender: gender.as_string().to_owned(),
             name: voice_name.to_owned(),
             body: text.to_owned(),
         };
-
         Self {
-            version: 1.0,
+            version: "1.0",
             xml_lang: language.to_owned(),
             voice,
         }
+    }
+
+    pub fn with_voice_settings(voice: &VoiceSettings, text: &str) -> Self {
+        Speak::new(&voice.language, voice.gender, &voice.name, text)
     }
 
     pub fn to_ssml_xml(&self) -> String {
@@ -30,6 +37,7 @@ impl Speak {
 }
 
 #[derive(Debug, Serialize, PartialEq)]
+#[serde(rename = "voice")]
 pub struct Voice {
     #[serde(rename = "xml:lang")]
     xml_lang: String,
@@ -46,10 +54,15 @@ mod tests {
 
     #[test]
     fn xml_serialization() {
-        let speak =
-            Speak::with_single_voice("en-US", "male", "voice_name", "Hi how are you doing?");
+        let speak = Speak::new(
+            "en-US",
+            VoiceGender::Female,
+            "en-US-JennyNeural",
+            "lorem ipsum",
+        );
 
-        let _xml = speak.to_ssml_xml();
-        // assert_eq!("", &xml);
+        let ssml = speak.to_ssml_xml();
+        let expected = "<speak version=\"1.0\" xml:lang=\"en-US\"><voice xml:lang=\"en-US\" xml:gender=\"Female\" name=\"en-US-JennyNeural\">lorem ipsum</voice></speak>";
+        assert_eq!(expected, &ssml);
     }
 }

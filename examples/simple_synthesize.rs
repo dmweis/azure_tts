@@ -7,18 +7,14 @@ async fn main() {
         .get(1)
         .expect("Please provide subscription key as argument");
     let mut client = azure_tts::VoiceService::new(subscription_key, "uksouth");
-    client.update_auth_token().await.unwrap();
-    // let voices = client.list_voices().await.unwrap();
-    let ssml = "<speak version='1.0' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Male'
-    name='en-US-ChristopherNeural'>
-        Microsoft Speech Service Text-to-Speech API
-</voice></speak>";
-    let _res = client
-        .synthesize_raw_text(
-            ssml.to_owned(),
+    let text = "Microsoft Speech Service Text-to-Speech API";
+    let res = client
+        .synthesize(
+            text,
+            &azure_tts::VoiceSettings::default_female_jenny(),
             azure_tts::AudioFormat::Audio48khz192kbitrateMonoMp3,
         )
         .await
         .unwrap();
-    // println!("res:\n{:?}", res);
+    println!("Response length:\n{}", res.len());
 }
