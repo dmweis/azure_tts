@@ -1,3 +1,3 @@
 var N = null;var sourcesIndex = {};
-sourcesIndex["azure_tts"] = {"name":"","files":["lib.rs","ssml_serializer.rs"]};
+sourcesIndex["azure_tts"] = {"name":"","files":["error.rs","lib.rs","ssml_serializer.rs","types.rs"]};
 createSourceSidebar();

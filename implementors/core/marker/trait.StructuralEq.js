@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["azure_tts"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.57.0/core/marker/trait.StructuralEq.html\" title=\"trait core::marker::StructuralEq\">StructuralEq</a> for <a class=\"enum\" href=\"azure_tts/enum.VoiceGender.html\" title=\"enum azure_tts::VoiceGender\">VoiceGender</a>","synthetic":false,"types":["azure_tts::VoiceGender"]}];
+implementors["azure_tts"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.57.0/core/marker/trait.StructuralEq.html\" title=\"trait core::marker::StructuralEq\">StructuralEq</a> for <a class=\"enum\" href=\"azure_tts/enum.VoiceGender.html\" title=\"enum azure_tts::VoiceGender\">VoiceGender</a>","synthetic":false,"types":["azure_tts::types::VoiceGender"]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
