@@ -1,4 +1,12 @@
 use std::env;
+use std::fs::File;
+use std::io::prelude::*;
+
+fn write_bytes_to_file(data: &[u8], path: &str) {
+    let mut file = File::create(path).unwrap();
+    file.write_all(data).unwrap();
+    file.flush().unwrap();
+}
 
 #[tokio::main]
 async fn main() {
@@ -17,4 +25,5 @@ async fn main() {
         .await
         .unwrap();
     println!("Response length:\n{}", res.len());
+    write_bytes_to_file(&res, "output.mp3");
 }

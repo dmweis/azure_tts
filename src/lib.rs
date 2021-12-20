@@ -4,6 +4,7 @@ mod types;
 
 use std::time::{Duration, Instant};
 
+use bytes::Buf;
 pub use error::TtsError;
 pub use ssml_serializer::Speak;
 pub use types::*;
@@ -59,7 +60,7 @@ impl VoiceService {
         &mut self,
         text: String,
         audio_format: AudioFormat,
-    ) -> Result<bytes::Bytes> {
+    ) -> Result<Vec<u8>> {
         self.renew_token_if_expired().await?;
         let endpoint = format!(
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
@@ -88,7 +89,7 @@ impl VoiceService {
             _ => return Err(TtsError::UnknownConnectionError),
         }
         let audio = response.bytes().await?;
-        Ok(audio)
+        Ok(audio.chunk().to_vec())
     }
 
     pub async fn synthesize(
@@ -96,7 +97,7 @@ impl VoiceService {
         text: &str,
         voice: &VoiceSettings,
         audio_format: AudioFormat,
-    ) -> Result<bytes::Bytes> {
+    ) -> Result<Vec<u8>> {
         self.renew_token_if_expired().await?;
         let endpoint = format!(
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
@@ -125,7 +126,7 @@ impl VoiceService {
             _ => return Err(TtsError::UnknownConnectionError),
         }
         let audio = response.bytes().await?;
-        Ok(audio)
+        Ok(audio.chunk().to_vec())
     }
 
     pub async fn update_auth_token(&mut self) -> Result<()> {
