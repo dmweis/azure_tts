@@ -180,6 +180,26 @@
 <span id="180">180</span>
 <span id="181">181</span>
 <span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 
 <span class="kw">type</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">std::result::Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">std::error::Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
@@ -334,31 +354,51 @@
 <span class="kw">impl</span> <span class="ident">AudioFormat</span> {
     <span class="kw">fn</span> <span class="ident">as_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">audio_16khz_128kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-128kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_16khz_32kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-32kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_16khz_64kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-64kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_24khz_160kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-160kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_24khz_48kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-48kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_24khz_96kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-96kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_48khz_192kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-48khz-192kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">audio_48khz_96kbitrate_mono_mp3</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;audio-48khz-96kbitrate-mono-mp3&quot;</span>),
-            <span class="ident">ogg_16khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-16khz-16bit-mono-opus&quot;</span>),
-            <span class="ident">ogg_24khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-24khz-16bit-mono-opus&quot;</span>),
-            <span class="ident">ogg_48khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-48khz-16bit-mono-opus&quot;</span>),
-            <span class="ident">raw_16khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-16khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">raw_16khz_16bit_mono_truesilk</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-16khz-16bit-mono-truesilk&quot;</span>),
-            <span class="ident">raw_24khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-24khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">raw_24khz_16bit_mono_truesilk</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-24khz-16bit-mono-truesilk&quot;</span>),
-            <span class="ident">raw_48khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-48khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">raw_8khz_8bit_mono_alaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-8khz-8bit-mono-alaw&quot;</span>),
-            <span class="ident">raw_8khz_8bit_mono_mulaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-8khz-8bit-mono-mulaw&quot;</span>),
-            <span class="ident">riff_16khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-16khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">riff_24khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-24khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">riff_48khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-48khz-16bit-mono-pcm&quot;</span>),
-            <span class="ident">riff_8khz_8bit_mono_alaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-8khz-8bit-mono-alaw&quot;</span>),
-            <span class="ident">riff_8khz_8bit_mono_mulaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-8khz-8bit-mono-mulaw&quot;</span>),
-            <span class="ident">webm_16khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;webm-16khz-16bit-mono-opus&quot;</span>),
-            <span class="ident">webm_24khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;webm-24khz-16bit-mono-opus&quot;</span>),
+            <span class="ident">AudioFormat::audio_16khz_128kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-128kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_16khz_32kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-32kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_16khz_64kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-16khz-64kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_24khz_160kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-160kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_24khz_48kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-48kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_24khz_96kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-24khz-96kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_48khz_192kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-48khz-192kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::audio_48khz_96kbitrate_mono_mp3</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;audio-48khz-96kbitrate-mono-mp3&quot;</span>)
+            }
+            <span class="ident">AudioFormat::ogg_16khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-16khz-16bit-mono-opus&quot;</span>),
+            <span class="ident">AudioFormat::ogg_24khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-24khz-16bit-mono-opus&quot;</span>),
+            <span class="ident">AudioFormat::ogg_48khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;ogg-48khz-16bit-mono-opus&quot;</span>),
+            <span class="ident">AudioFormat::raw_16khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-16khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::raw_16khz_16bit_mono_truesilk</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;raw-16khz-16bit-mono-truesilk&quot;</span>)
+            }
+            <span class="ident">AudioFormat::raw_24khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-24khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::raw_24khz_16bit_mono_truesilk</span> =&gt; {
+                <span class="ident">String::from</span>(<span class="string">&quot;raw-24khz-16bit-mono-truesilk&quot;</span>)
+            }
+            <span class="ident">AudioFormat::raw_48khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-48khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::raw_8khz_8bit_mono_alaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-8khz-8bit-mono-alaw&quot;</span>),
+            <span class="ident">AudioFormat::raw_8khz_8bit_mono_mulaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;raw-8khz-8bit-mono-mulaw&quot;</span>),
+            <span class="ident">AudioFormat::riff_16khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-16khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::riff_24khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-24khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::riff_48khz_16bit_mono_pcm</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-48khz-16bit-mono-pcm&quot;</span>),
+            <span class="ident">AudioFormat::riff_8khz_8bit_mono_alaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-8khz-8bit-mono-alaw&quot;</span>),
+            <span class="ident">AudioFormat::riff_8khz_8bit_mono_mulaw</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;riff-8khz-8bit-mono-mulaw&quot;</span>),
+            <span class="ident">AudioFormat::webm_16khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;webm-16khz-16bit-mono-opus&quot;</span>),
+            <span class="ident">AudioFormat::webm_24khz_16bit_mono_opus</span> =&gt; <span class="ident">String::from</span>(<span class="string">&quot;webm-24khz-16bit-mono-opus&quot;</span>),
         }
     }
 }
