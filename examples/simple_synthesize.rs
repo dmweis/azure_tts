@@ -16,7 +16,7 @@ async fn main() {
     let _res = client
         .convert(
             ssml.to_owned(),
-            azure_tts::AudioFormat::audio_48khz_192kbitrate_mono_mp3,
+            azure_tts::AudioFormat::Audio48khz192kbitrateMonoMp3,
         )
         .await
         .unwrap();
