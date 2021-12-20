@@ -154,12 +154,14 @@
 <span id="154">154</span>
 <span id="155">155</span>
 <span id="156">156</span>
+<span id="157">157</span>
 </pre><pre class="rust"><code><span class="kw">mod</span> <span class="ident">error</span>;
 <span class="kw">mod</span> <span class="ident">ssml_serializer</span>;
 <span class="kw">mod</span> <span class="ident">types</span>;
 
 <span class="kw">use</span> <span class="ident">std::time</span>::{<span class="ident">Duration</span>, <span class="ident">Instant</span>};
 
+<span class="kw">use</span> <span class="ident">bytes::Buf</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">error::TtsError</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ssml_serializer::Speak</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
@@ -215,7 +217,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">text</span>: <span class="ident">String</span>,
         <span class="ident">audio_format</span>: <span class="ident">AudioFormat</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bytes::Bytes</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">renew_token_if_expired</span>().<span class="kw">await</span><span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">endpoint</span> <span class="op">=</span> <span class="macro">format!</span>(
             <span class="string">&quot;https://{}.tts.speech.microsoft.com/cognitiveservices/v1&quot;</span>,
@@ -244,7 +246,7 @@
             <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TtsError::UnknownConnectionError</span>),
         }
         <span class="kw">let</span> <span class="ident">audio</span> <span class="op">=</span> <span class="ident">response</span>.<span class="ident">bytes</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">audio</span>)
+        <span class="prelude-val">Ok</span>(<span class="ident">audio</span>.<span class="ident">chunk</span>().<span class="ident">to_vec</span>())
     }
 
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">synthesize</span>(
@@ -252,7 +254,7 @@
         <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
         <span class="ident">voice</span>: <span class="kw-2">&amp;</span><span class="ident">VoiceSettings</span>,
         <span class="ident">audio_format</span>: <span class="ident">AudioFormat</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bytes::Bytes</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">renew_token_if_expired</span>().<span class="kw">await</span><span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">endpoint</span> <span class="op">=</span> <span class="macro">format!</span>(
             <span class="string">&quot;https://{}.tts.speech.microsoft.com/cognitiveservices/v1&quot;</span>,
@@ -281,7 +283,7 @@
             <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">TtsError::UnknownConnectionError</span>),
         }
         <span class="kw">let</span> <span class="ident">audio</span> <span class="op">=</span> <span class="ident">response</span>.<span class="ident">bytes</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">audio</span>)
+        <span class="prelude-val">Ok</span>(<span class="ident">audio</span>.<span class="ident">chunk</span>().<span class="ident">to_vec</span>())
     }
 
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">update_auth_token</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
