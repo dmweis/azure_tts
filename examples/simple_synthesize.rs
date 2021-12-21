@@ -19,7 +19,7 @@ async fn main() {
     let res = client
         .synthesize(
             text,
-            &azure_tts::VoiceSettings::default_female_jenny(),
+            &azure_tts::EnUsVoices::CoraNeural.to_voice_settings(),
             azure_tts::AudioFormat::Audio48khz192kbitrateMonoMp3,
         )
         .await

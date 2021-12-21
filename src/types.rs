@@ -189,3 +189,79 @@ impl Region {
         }
     }
 }
+
+pub enum EnUsVoices {
+    JennyNeural,
+    JennyMultilingualNeural,
+    GuyNeural,
+    AmberNeural,
+    AnaNeural,
+    AriaNeural,
+    AshleyNeural,
+    BrandonNeural,
+    ChristopherNeural,
+    CoraNeural,
+    ElizabethNeural,
+    EricNeural,
+    JacobNeural,
+    MichelleNeural,
+    MonicaNeural,
+    SaraNeural,
+}
+
+impl EnUsVoices {
+    pub fn to_voice_settings(&self) -> VoiceSettings {
+        match self {
+            EnUsVoices::JennyNeural => {
+                VoiceSettings::new("en-US-JennyNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::JennyMultilingualNeural => VoiceSettings::new(
+                "en-US-JennyMultilingualNeural",
+                "en-US",
+                VoiceGender::Female,
+            ),
+            EnUsVoices::GuyNeural => {
+                VoiceSettings::new("en-US-GuyNeural", "en-US", VoiceGender::Male)
+            }
+            EnUsVoices::AmberNeural => {
+                VoiceSettings::new("en-US-AmberNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::AnaNeural => {
+                VoiceSettings::new("en-US-AnaNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::AriaNeural => {
+                VoiceSettings::new("en-US-AriaNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::AshleyNeural => {
+                VoiceSettings::new("en-US-AshleyNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::BrandonNeural => {
+                VoiceSettings::new("en-US-BrandonNeural", "en-US", VoiceGender::Male)
+            }
+            EnUsVoices::ChristopherNeural => {
+                VoiceSettings::new("en-US-ChristopherNeural", "en-US", VoiceGender::Male)
+            }
+            EnUsVoices::CoraNeural => {
+                VoiceSettings::new("en-US-CoraNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::ElizabethNeural => {
+                VoiceSettings::new("en-US-ElizabethNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::EricNeural => {
+                VoiceSettings::new("en-US-EricNeural", "en-US", VoiceGender::Male)
+            }
+            EnUsVoices::JacobNeural => {
+                VoiceSettings::new("en-US-JacobNeural", "en-US", VoiceGender::Male)
+            }
+            EnUsVoices::MichelleNeural => {
+                VoiceSettings::new("en-US-MichelleNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::MonicaNeural => {
+                VoiceSettings::new("en-US-MonicaNeural", "en-US", VoiceGender::Female)
+            }
+            EnUsVoices::SaraNeural => {
+                VoiceSettings::new("en-US-SaraNeural", "en-US", VoiceGender::Female)
+            }
+        }
+    }
+}
