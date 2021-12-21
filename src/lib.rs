@@ -12,7 +12,7 @@ pub use types::*;
 type Result<T> = std::result::Result<T, TtsError>;
 
 pub struct VoiceService {
-    service_region: String,
+    service_region: Region,
     subscription_key: String,
     access_token: String,
     access_toke_time: Instant,
@@ -23,12 +23,12 @@ pub struct VoiceService {
 const ACCESS_TOKEN_TIMEOUT: Duration = Duration::from_secs(60 * 9);
 
 impl VoiceService {
-    pub fn new(subscription_key: &str, service_region: &str) -> Self {
+    pub fn new(subscription_key: &str, service_region: Region) -> Self {
         let https_client = reqwest::Client::new();
         // make optional or query immediately
         let access_token = String::from("");
         Self {
-            service_region: service_region.to_owned(),
+            service_region,
             subscription_key: subscription_key.to_owned(),
             access_token,
             access_toke_time: Instant::now() - ACCESS_TOKEN_TIMEOUT,
@@ -38,7 +38,10 @@ impl VoiceService {
 
     pub async fn list_voices(&mut self) -> Result<Vec<VoiceDescription>> {
         self.renew_token_if_expired().await?;
-        let region_host_name = format!("{}.tts.speech.microsoft.com", self.service_region);
+        let region_host_name = format!(
+            "{}.tts.speech.microsoft.com",
+            self.service_region.as_string()
+        );
         let endpoint = format!("https://{}/cognitiveservices/voices/list", region_host_name);
         let bearer_token = format!("Bearer: {}", self.access_token);
 
@@ -64,7 +67,7 @@ impl VoiceService {
         self.renew_token_if_expired().await?;
         let endpoint = format!(
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
-            self.service_region
+            self.service_region.as_string()
         );
         let bearer_token = format!("Bearer: {}", self.access_token);
 
@@ -101,7 +104,7 @@ impl VoiceService {
         self.renew_token_if_expired().await?;
         let endpoint = format!(
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
-            self.service_region
+            self.service_region.as_string()
         );
         let bearer_token = format!("Bearer: {}", self.access_token);
 
@@ -130,7 +133,10 @@ impl VoiceService {
     }
 
     pub async fn update_auth_token(&mut self) -> Result<()> {
-        let region_host_name = format!("{}.api.cognitive.microsoft.com", self.service_region);
+        let region_host_name = format!(
+            "{}.api.cognitive.microsoft.com",
+            self.service_region.as_string()
+        );
         let endpoint = format!("https://{}/sts/v1.0/issuetoken", region_host_name);
         let response = self
             .https_client

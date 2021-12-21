@@ -14,8 +14,8 @@ async fn main() {
     let subscription_key = args
         .get(1)
         .expect("Please provide subscription key as argument");
-    let mut client = azure_tts::VoiceService::new(subscription_key, "uksouth");
-    let text = "Microsoft Speech Service Text-to-Speech API";
+    let mut client = azure_tts::VoiceService::new(subscription_key, azure_tts::Region::uksouth);
+    let text = "Hi. How are you doing this lovely evening?";
     let res = client
         .synthesize(
             text,

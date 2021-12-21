@@ -134,3 +134,58 @@ impl AudioFormat {
         }
     }
 }
+
+#[allow(non_camel_case_types)]
+pub enum Region {
+    centralus,
+    eastus,
+    eastus2,
+    northcentralus,
+    southcentralus,
+    westcentralus,
+    westus,
+    westus2,
+    canadacentral,
+    brazilsouth,
+    eastasia,
+    southeastasia,
+    australiaeast,
+    centralindia,
+    japaneast,
+    japanwest,
+    koreacentral,
+    northeurope,
+    westeurope,
+    francecentral,
+    switzerlandnorth,
+    uksouth,
+}
+
+impl Region {
+    pub(crate) fn as_string(&self) -> &'static str {
+        match self {
+            Region::centralus => "centralus",
+            Region::eastus => "eastus",
+            Region::eastus2 => "eastus2",
+            Region::northcentralus => "northcentralus",
+            Region::southcentralus => "southcentralus",
+            Region::westcentralus => "westcentralus",
+            Region::westus => "westus",
+            Region::westus2 => "westus2",
+            Region::canadacentral => "canadacentral",
+            Region::brazilsouth => "brazilsouth",
+            Region::eastasia => "eastasia",
+            Region::southeastasia => "southeastasia",
+            Region::australiaeast => "australiaeast",
+            Region::centralindia => "centralindia",
+            Region::japaneast => "japaneast",
+            Region::japanwest => "japanwest",
+            Region::koreacentral => "koreacentral",
+            Region::northeurope => "northeurope",
+            Region::westeurope => "westeurope",
+            Region::francecentral => "francecentral",
+            Region::switzerlandnorth => "switzerlandnorth",
+            Region::uksouth => "uksouth",
+        }
+    }
+}
