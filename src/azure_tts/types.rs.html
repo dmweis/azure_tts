@@ -134,6 +134,61 @@
 <span id="134">134</span>
 <span id="135">135</span>
 <span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VoiceSettings</span> {
@@ -267,6 +322,61 @@
             <span class="ident">AudioFormat::Riff8khz8bitMonoMulaw</span> =&gt; <span class="string">&quot;riff-8khz-8bit-mono-mulaw&quot;</span>,
             <span class="ident">AudioFormat::Webm16khz16bitMonoOpus</span> =&gt; <span class="string">&quot;webm-16khz-16bit-mono-opus&quot;</span>,
             <span class="ident">AudioFormat::Webm24khz16bitMonoOpus</span> =&gt; <span class="string">&quot;webm-24khz-16bit-mono-opus&quot;</span>,
+        }
+    }
+}
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Region</span> {
+    <span class="ident">centralus</span>,
+    <span class="ident">eastus</span>,
+    <span class="ident">eastus2</span>,
+    <span class="ident">northcentralus</span>,
+    <span class="ident">southcentralus</span>,
+    <span class="ident">westcentralus</span>,
+    <span class="ident">westus</span>,
+    <span class="ident">westus2</span>,
+    <span class="ident">canadacentral</span>,
+    <span class="ident">brazilsouth</span>,
+    <span class="ident">eastasia</span>,
+    <span class="ident">southeastasia</span>,
+    <span class="ident">australiaeast</span>,
+    <span class="ident">centralindia</span>,
+    <span class="ident">japaneast</span>,
+    <span class="ident">japanwest</span>,
+    <span class="ident">koreacentral</span>,
+    <span class="ident">northeurope</span>,
+    <span class="ident">westeurope</span>,
+    <span class="ident">francecentral</span>,
+    <span class="ident">switzerlandnorth</span>,
+    <span class="ident">uksouth</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">Region</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">as_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">Region::centralus</span> =&gt; <span class="string">&quot;centralus&quot;</span>,
+            <span class="ident">Region::eastus</span> =&gt; <span class="string">&quot;eastus&quot;</span>,
+            <span class="ident">Region::eastus2</span> =&gt; <span class="string">&quot;eastus2&quot;</span>,
+            <span class="ident">Region::northcentralus</span> =&gt; <span class="string">&quot;northcentralus&quot;</span>,
+            <span class="ident">Region::southcentralus</span> =&gt; <span class="string">&quot;southcentralus&quot;</span>,
+            <span class="ident">Region::westcentralus</span> =&gt; <span class="string">&quot;westcentralus&quot;</span>,
+            <span class="ident">Region::westus</span> =&gt; <span class="string">&quot;westus&quot;</span>,
+            <span class="ident">Region::westus2</span> =&gt; <span class="string">&quot;westus2&quot;</span>,
+            <span class="ident">Region::canadacentral</span> =&gt; <span class="string">&quot;canadacentral&quot;</span>,
+            <span class="ident">Region::brazilsouth</span> =&gt; <span class="string">&quot;brazilsouth&quot;</span>,
+            <span class="ident">Region::eastasia</span> =&gt; <span class="string">&quot;eastasia&quot;</span>,
+            <span class="ident">Region::southeastasia</span> =&gt; <span class="string">&quot;southeastasia&quot;</span>,
+            <span class="ident">Region::australiaeast</span> =&gt; <span class="string">&quot;australiaeast&quot;</span>,
+            <span class="ident">Region::centralindia</span> =&gt; <span class="string">&quot;centralindia&quot;</span>,
+            <span class="ident">Region::japaneast</span> =&gt; <span class="string">&quot;japaneast&quot;</span>,
+            <span class="ident">Region::japanwest</span> =&gt; <span class="string">&quot;japanwest&quot;</span>,
+            <span class="ident">Region::koreacentral</span> =&gt; <span class="string">&quot;koreacentral&quot;</span>,
+            <span class="ident">Region::northeurope</span> =&gt; <span class="string">&quot;northeurope&quot;</span>,
+            <span class="ident">Region::westeurope</span> =&gt; <span class="string">&quot;westeurope&quot;</span>,
+            <span class="ident">Region::francecentral</span> =&gt; <span class="string">&quot;francecentral&quot;</span>,
+            <span class="ident">Region::switzerlandnorth</span> =&gt; <span class="string">&quot;switzerlandnorth&quot;</span>,
+            <span class="ident">Region::uksouth</span> =&gt; <span class="string">&quot;uksouth&quot;</span>,
         }
     }
 }
