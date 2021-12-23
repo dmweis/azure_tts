@@ -14,7 +14,7 @@ type Result<T> = std::result::Result<T, TtsError>;
 pub struct VoiceService {
     service_region: Region,
     subscription_key: String,
-    access_token: String,
+    access_token: Option<String>,
     access_toke_time: Instant,
     https_client: reqwest::Client,
 }
@@ -26,12 +26,11 @@ impl VoiceService {
     pub fn new(subscription_key: &str, service_region: Region) -> Self {
         let https_client = reqwest::Client::new();
         // make optional or query immediately
-        let access_token = String::from("");
         Self {
             service_region,
             subscription_key: subscription_key.to_owned(),
-            access_token,
-            access_toke_time: Instant::now() - ACCESS_TOKEN_TIMEOUT,
+            access_token: None,
+            access_toke_time: Instant::now(),
             https_client,
         }
     }
@@ -43,7 +42,12 @@ impl VoiceService {
             self.service_region.as_string()
         );
         let endpoint = format!("https://{}/cognitiveservices/voices/list", region_host_name);
-        let bearer_token = format!("Bearer: {}", self.access_token);
+        let bearer_token = format!(
+            "Bearer: {}",
+            self.access_token
+                .as_ref()
+                .ok_or(TtsError::AuthenticationTimeoutFailure)?
+        );
 
         // this can auth using either access token or sub key
         let response = self
@@ -69,7 +73,12 @@ impl VoiceService {
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
             self.service_region.as_string()
         );
-        let bearer_token = format!("Bearer: {}", self.access_token);
+        let bearer_token = format!(
+            "Bearer: {}",
+            self.access_token
+                .as_ref()
+                .ok_or(TtsError::AuthenticationTimeoutFailure)?
+        );
 
         let response = self
             .https_client
@@ -106,7 +115,12 @@ impl VoiceService {
             "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
             self.service_region.as_string()
         );
-        let bearer_token = format!("Bearer: {}", self.access_token);
+        let bearer_token = format!(
+            "Bearer: {}",
+            self.access_token
+                .as_ref()
+                .ok_or(TtsError::AuthenticationTimeoutFailure)?
+        );
 
         let response = self
             .https_client
@@ -149,13 +163,13 @@ impl VoiceService {
             .await?
             .text()
             .await?;
-        self.access_token = response;
+        self.access_token = Some(response);
         self.access_toke_time = Instant::now();
         Ok(())
     }
 
     async fn renew_token_if_expired(&mut self) -> Result<()> {
-        if self.access_toke_time.elapsed() > ACCESS_TOKEN_TIMEOUT {
+        if self.access_token.is_none() || self.access_toke_time.elapsed() > ACCESS_TOKEN_TIMEOUT {
             self.update_auth_token().await?;
         }
         Ok(())

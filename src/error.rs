@@ -14,4 +14,6 @@ pub enum TtsError {
     ConnectionError(#[from] reqwest::Error),
     #[error("unknown error communicating with the api")]
     UnknownConnectionError,
+    #[error("failed to renew auth token")]
+    AuthenticationTimeoutFailure,
 }
