@@ -265,3 +265,47 @@ impl EnUsVoices {
         }
     }
 }
+
+#[derive(Serialize, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Style {
+    #[serde(rename = "$primitive=affectionate")]
+    Affectionate,
+    #[serde(rename = "$primitive=angry")]
+    Angry,
+    #[serde(rename = "$primitive=assistant")]
+    Assistant,
+    #[serde(rename = "$primitive=calm")]
+    Calm,
+    #[serde(rename = "$primitive=chat")]
+    Chat,
+    #[serde(rename = "$primitive=cheerful")]
+    Cheerful,
+    #[serde(rename = "$primitive=customerservice")]
+    Customerservice,
+    #[serde(rename = "$primitive=disgruntled")]
+    Disgruntled,
+    #[serde(rename = "$primitive=empathetic")]
+    Empathetic,
+    #[serde(rename = "$primitive=fearful")]
+    Fearful,
+    #[serde(rename = "$primitive=gentle")]
+    Gentle,
+    #[serde(rename = "$primitive=lyrical")]
+    Lyrical,
+    #[serde(rename = "$primitive=narration-professional")]
+    NarrationProfessional,
+    #[serde(rename = "$primitive=newscast")]
+    Newscast,
+    #[serde(rename = "$primitive=newscast-casual")]
+    NewscastCasual,
+    #[serde(rename = "$primitive=newscast-formal")]
+    NewscastFormal,
+    #[serde(rename = "$primitive=sad")]
+    Sad,
+    #[serde(rename = "$primitive=serious")]
+    Serious,
+    #[serde(rename = "$primitive=depressed")]
+    Depressed,
+    #[serde(rename = "$primitive=embarrassed")]
+    Embarrassed,
+}

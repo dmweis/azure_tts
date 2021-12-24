@@ -129,7 +129,7 @@ impl VoiceService {
             .header("X-Microsoft-OutputFormat", audio_format.as_string())
             .header("Content-Type", "application/ssml+xml")
             .header("User-Agent", "rust-azure-tts-client-lib")
-            .body(Speak::with_voice_settings(voice, text).to_ssml_xml())
+            .body(Speak::text_with_voice_settings(voice, text).to_ssml_xml())
             .send()
             .await?;
         match response.status() {

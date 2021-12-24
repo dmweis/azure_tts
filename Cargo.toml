@@ -10,7 +10,8 @@ reqwest = { version = "0.11", features = ["json"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 bytes = "1.1"
-quick-xml = { version = "0.22", features = ["serialize"] }
+quick-xml = { red = "d8727717fb062a2b2d31ce748959220a28da9f32", features = ["serialize"], git = "https://github.com/tafia/quick-xml" }
+# quick-xml = { version = "0.22", features = ["serialize"] }
 thiserror = "1.0"
 
 [dev-dependencies]
