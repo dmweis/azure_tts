@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["AudioFormat",""],["EnUsVoices",""],["Region",""],["TtsError",""],["VoiceGender",""]],"struct":[["Speak",""],["VoiceDescription",""],["VoiceService",""],["VoiceSettings",""]]});
+initSidebarItems({"enum":[["AudioFormat",""],["EnUsVoices",""],["Region",""],["Style",""],["TtsError",""],["VoiceGender",""]],"struct":[["Speak",""],["VoiceDescription",""],["VoiceService",""],["VoiceSettings",""]]});

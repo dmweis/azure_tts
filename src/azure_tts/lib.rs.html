@@ -306,7 +306,7 @@
             .<span class="ident">header</span>(<span class="string">&quot;X-Microsoft-OutputFormat&quot;</span>, <span class="ident">audio_format</span>.<span class="ident">as_string</span>())
             .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/ssml+xml&quot;</span>)
             .<span class="ident">header</span>(<span class="string">&quot;User-Agent&quot;</span>, <span class="string">&quot;rust-azure-tts-client-lib&quot;</span>)
-            .<span class="ident">body</span>(<span class="ident">Speak::with_voice_settings</span>(<span class="ident">voice</span>, <span class="ident">text</span>).<span class="ident">to_ssml_xml</span>())
+            .<span class="ident">body</span>(<span class="ident">Speak::text_with_voice_settings</span>(<span class="ident">voice</span>, <span class="ident">text</span>).<span class="ident">to_ssml_xml</span>())
             .<span class="ident">send</span>()
             .<span class="kw">await</span><span class="question-mark">?</span>;
         <span class="kw">match</span> <span class="ident">response</span>.<span class="ident">status</span>() {
