@@ -66,15 +66,31 @@
 <span id="66">66</span>
 <span id="67">67</span>
 <span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
 </pre><pre class="rust"><code><span class="doccomment">/// Very simple ssml serializer. Currently only supports single voice selection.</span>
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">types::VoiceGender</span>, <span class="ident">VoiceSettings</span>};
 <span class="kw">use</span> <span class="ident">serde::Serialize</span>;
+
+<span class="kw">const</span> <span class="ident">XML_VERSION</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;1.0&quot;</span>;
+<span class="kw">const</span> <span class="ident">XMLNS_LINK</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;http://www.w3.org/2001/10/synthesis&quot;</span>;
+<span class="kw">const</span> <span class="ident">XMLNS_MSTTS_LINK</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;https://www.w3.org/2001/mstts&quot;</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;speak&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Speak</span> {
     <span class="comment">// Needs decimal numbers</span>
     <span class="ident">version</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="ident">xmlns</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;xmlns:mstts&quot;</span>)]</span>
+    <span class="ident">xmlns_mstts</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;xml:lang&quot;</span>)]</span>
     <span class="ident">xml_lang</span>: <span class="ident">String</span>,
     <span class="ident">voice</span>: <span class="ident">Voice</span>,
@@ -89,7 +105,9 @@
             <span class="ident">body</span>: <span class="ident">text</span>.<span class="ident">to_owned</span>(),
         };
         <span class="self">Self</span> {
-            <span class="ident">version</span>: <span class="string">&quot;1.0&quot;</span>,
+            <span class="ident">version</span>: <span class="ident">XML_VERSION</span>,
+            <span class="ident">xmlns</span>: <span class="ident">XMLNS_LINK</span>,
+            <span class="ident">xmlns_mstts</span>: <span class="ident">XMLNS_MSTTS_LINK</span>,
             <span class="ident">xml_lang</span>: <span class="ident">language</span>.<span class="ident">to_owned</span>(),
             <span class="ident">voice</span>,
         }
@@ -130,7 +148,7 @@
         );
 
         <span class="kw">let</span> <span class="ident">ssml</span> <span class="op">=</span> <span class="ident">speak</span>.<span class="ident">to_ssml_xml</span>();
-        <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="string">&quot;&lt;speak version=\&quot;1.0\&quot; xml:lang=\&quot;en-US\&quot;&gt;&lt;voice xml:lang=\&quot;en-US\&quot; xml:gender=\&quot;Female\&quot; name=\&quot;en-US-JennyNeural\&quot;&gt;lorem ipsum&lt;/voice&gt;&lt;/speak&gt;&quot;</span>;
+        <span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="string">&quot;&lt;speak version=\&quot;1.0\&quot; xmlns=\&quot;http://www.w3.org/2001/10/synthesis\&quot; xmlns:mstts=\&quot;https://www.w3.org/2001/mstts\&quot; xml:lang=\&quot;en-US\&quot;&gt;&lt;voice xml:lang=\&quot;en-US\&quot; xml:gender=\&quot;Female\&quot; name=\&quot;en-US-JennyNeural\&quot;&gt;lorem ipsum&lt;/voice&gt;&lt;/speak&gt;&quot;</span>;
         <span class="macro">assert_eq!</span>(<span class="ident">expected</span>, <span class="kw-2">&amp;</span><span class="ident">ssml</span>);
     }
 }
