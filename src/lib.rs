@@ -6,7 +6,7 @@ use std::time::{Duration, Instant};
 
 use bytes::Buf;
 pub use error::TtsError;
-pub use ssml_serializer::Speak;
+pub use ssml_serializer::{Speak, VoiceSegment};
 pub use types::*;
 
 type Result<T> = std::result::Result<T, TtsError>;
@@ -130,6 +130,48 @@ impl VoiceService {
             .header("Content-Type", "application/ssml+xml")
             .header("User-Agent", "rust-azure-tts-client-lib")
             .body(Speak::text_with_voice_settings(voice, text).to_ssml_xml())
+            .send()
+            .await?;
+        match response.status() {
+            reqwest::StatusCode::OK => (),
+            reqwest::StatusCode::BAD_REQUEST => return Err(TtsError::BadRequest),
+            reqwest::StatusCode::UNAUTHORIZED => return Err(TtsError::AuthError),
+            reqwest::StatusCode::UNSUPPORTED_MEDIA_TYPE => {
+                return Err(TtsError::UnsupportedMediaType)
+            }
+            reqwest::StatusCode::TOO_MANY_REQUESTS => return Err(TtsError::TooManyRequest),
+            _ => return Err(TtsError::UnknownConnectionError),
+        }
+        let audio = response.bytes().await?;
+        Ok(audio.chunk().to_vec())
+    }
+
+    pub async fn synthesize_segments(
+        &mut self,
+        segments: Vec<VoiceSegment>,
+        voice: &VoiceSettings,
+        audio_format: AudioFormat,
+    ) -> Result<Vec<u8>> {
+        self.renew_token_if_expired().await?;
+        let endpoint = format!(
+            "https://{}.tts.speech.microsoft.com/cognitiveservices/v1",
+            self.service_region.as_string()
+        );
+        let bearer_token = format!(
+            "Bearer: {}",
+            self.access_token
+                .as_ref()
+                .ok_or(TtsError::AuthenticationTimeoutFailure)?
+        );
+
+        let response = self
+            .https_client
+            .post(endpoint)
+            .header("Authorization", bearer_token)
+            .header("X-Microsoft-OutputFormat", audio_format.as_string())
+            .header("Content-Type", "application/ssml+xml")
+            .header("User-Agent", "rust-azure-tts-client-lib")
+            .body(Speak::segments_with_voice_settings(voice, segments).to_ssml_xml())
             .send()
             .await?;
         match response.status() {
