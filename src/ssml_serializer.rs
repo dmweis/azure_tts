@@ -2,11 +2,18 @@
 use crate::{types::VoiceGender, VoiceSettings};
 use serde::Serialize;
 
+const XML_VERSION: &str = "1.0";
+const XMLNS_LINK: &str = "http://www.w3.org/2001/10/synthesis";
+const XMLNS_MSTTS_LINK: &str = "https://www.w3.org/2001/mstts";
+
 #[derive(Debug, Serialize, PartialEq)]
 #[serde(rename = "speak")]
 pub struct Speak {
     // Needs decimal numbers
     version: &'static str,
+    xmlns: &'static str,
+    #[serde(rename = "xmlns:mstts")]
+    xmlns_mstts: &'static str,
     #[serde(rename = "xml:lang")]
     xml_lang: String,
     voice: Voice,
@@ -21,7 +28,9 @@ impl Speak {
             body: text.to_owned(),
         };
         Self {
-            version: "1.0",
+            version: XML_VERSION,
+            xmlns: XMLNS_LINK,
+            xmlns_mstts: XMLNS_MSTTS_LINK,
             xml_lang: language.to_owned(),
             voice,
         }
@@ -62,7 +71,7 @@ mod tests {
         );
 
         let ssml = speak.to_ssml_xml();
-        let expected = "<speak version=\"1.0\" xml:lang=\"en-US\"><voice xml:lang=\"en-US\" xml:gender=\"Female\" name=\"en-US-JennyNeural\">lorem ipsum</voice></speak>";
+        let expected = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"en-US\"><voice xml:lang=\"en-US\" xml:gender=\"Female\" name=\"en-US-JennyNeural\">lorem ipsum</voice></speak>";
         assert_eq!(expected, &ssml);
     }
 }
