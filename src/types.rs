@@ -75,6 +75,7 @@ impl VoiceDescription {
     }
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum AudioFormat {
     Audio16khz128kbitrateMonoMp3,
     Audio16khz32kbitrateMonoMp3,
@@ -104,7 +105,7 @@ pub enum AudioFormat {
 }
 
 impl AudioFormat {
-    pub(crate) fn as_string(&self) -> &'static str {
+    pub fn as_string(&self) -> &'static str {
         match self {
             AudioFormat::Audio16khz128kbitrateMonoMp3 => "audio-16khz-128kbitrate-mono-mp3",
             AudioFormat::Audio16khz32kbitrateMonoMp3 => "audio-16khz-32kbitrate-mono-mp3",
@@ -135,6 +136,7 @@ impl AudioFormat {
     }
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[allow(non_camel_case_types)]
 pub enum Region {
     centralus,
@@ -190,6 +192,7 @@ impl Region {
     }
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum EnUsVoices {
     JennyNeural,
     JennyMultilingualNeural,
