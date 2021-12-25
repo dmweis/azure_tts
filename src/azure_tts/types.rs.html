@@ -309,6 +309,9 @@
 <span id="309">309</span>
 <span id="310">310</span>
 <span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VoiceSettings</span> {
@@ -386,6 +389,7 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">AudioFormat</span> {
     <span class="ident">Audio16khz128kbitrateMonoMp3</span>,
     <span class="ident">Audio16khz32kbitrateMonoMp3</span>,
@@ -415,7 +419,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">AudioFormat</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">as_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_string</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">AudioFormat::Audio16khz128kbitrateMonoMp3</span> =&gt; <span class="string">&quot;audio-16khz-128kbitrate-mono-mp3&quot;</span>,
             <span class="ident">AudioFormat::Audio16khz32kbitrateMonoMp3</span> =&gt; <span class="string">&quot;audio-16khz-32kbitrate-mono-mp3&quot;</span>,
@@ -446,6 +450,7 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Region</span> {
     <span class="ident">centralus</span>,
@@ -501,6 +506,7 @@
     }
 }
 
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">EnUsVoices</span> {
     <span class="ident">JennyNeural</span>,
     <span class="ident">JennyMultilingualNeural</span>,
