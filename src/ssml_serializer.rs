@@ -1,5 +1,5 @@
 /// Very simple ssml serializer. Currently only supports single voice selection.
-use crate::{types::VoiceGender, Style, VoiceSettings};
+use crate::{types::VoiceGender, SilenceAttributeType, Style, VoiceSettings};
 use serde::Serialize;
 
 const XML_VERSION: &str = "1.0";
@@ -80,10 +80,14 @@ impl Speak {
 
     pub fn to_ssml_xml(&self) -> String {
         let xml = quick_xml::se::to_string(self).expect("Failed to serialize ssml");
-        // TODO: This is a weird hack
+        // TODO(David): This is a weird hack
         // Either there is a bug in the library
         // Or more likely in my code
-        xml.replace("$value", "mstts:express-as")
+
+        // and it's getting even weirder now that I support the silence type
+        xml.replace("$value style", "mstts:express-as style")
+            .replace("$value type", "mstts:silence type")
+            .replace("$value", "mstts:express-as")
     }
 }
 
@@ -103,7 +107,9 @@ pub struct Voice {
 #[serde(untagged)]
 pub enum VoiceSegment {
     Plain(String),
+    #[serde(rename = "$value")]
     ExpressAs(ExpressAs),
+    SilenceAttribute(SilenceAttribute),
 }
 
 impl VoiceSegment {
@@ -118,6 +124,14 @@ impl VoiceSegment {
         };
         VoiceSegment::ExpressAs(express_as)
     }
+
+    pub fn silence(attribute_type: SilenceAttributeType, value: String) -> Self {
+        let silence = SilenceAttribute {
+            attribute_type,
+            value,
+        };
+        VoiceSegment::SilenceAttribute(silence)
+    }
 }
 
 #[derive(Debug, Serialize, PartialEq)]
@@ -127,6 +141,15 @@ pub struct ExpressAs {
     style: Style,
     #[serde(rename = "$value")]
     body: String,
+}
+
+// <mstts:silence type="Sentenceboundary" value="200ms"/>
+#[derive(Debug, Serialize, PartialEq)]
+#[serde(rename = "mstts:silence")]
+pub struct SilenceAttribute {
+    #[serde(rename = "type")]
+    attribute_type: SilenceAttributeType,
+    value: String,
 }
 
 #[cfg(test)]
@@ -171,6 +194,28 @@ xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"en-US\">\
 <mstts:express-as style=\"cheerful\">lorem ipsum</mstts:express-as>\
 </voice>\
 </speak>";
+        assert_eq!(expected, &ssml);
+    }
+
+    #[test]
+    fn xml_serialization_silence_attribute() {
+        let speak = Speak::with_segments(
+            "en-US",
+            VoiceGender::Female,
+            "en-US-SaraNeural",
+            vec![
+                VoiceSegment::silence(SilenceAttributeType::Sentenceboundary, "100ms".to_owned()),
+                VoiceSegment::plain("lorem ipsum"),
+            ],
+        );
+
+        let ssml = speak.to_ssml_xml();
+        let expected = "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" \
+    xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"en-US\">\
+    <voice xml:lang=\"en-US\" xml:gender=\"Female\" name=\"en-US-SaraNeural\">\
+    <mstts:silence type=\"Sentenceboundary\" value=\"100ms\"/>lorem ipsum\
+    </voice>\
+    </speak>";
         assert_eq!(expected, &ssml);
     }
 

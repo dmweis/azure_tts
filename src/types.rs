@@ -312,3 +312,13 @@ pub enum Style {
     #[serde(rename = "$primitive=embarrassed")]
     Embarrassed,
 }
+
+#[derive(Serialize, Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SilenceAttributeType {
+    #[serde(rename = "$primitive=Leading")]
+    Leading,
+    #[serde(rename = "$primitive=Tailing")]
+    Tailing,
+    #[serde(rename = "$primitive=Sentenceboundary")]
+    Sentenceboundary,
+}
