@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct VoiceSettings {
     pub name: String,
     pub language: String,
