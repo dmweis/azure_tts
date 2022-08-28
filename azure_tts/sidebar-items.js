@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["AudioFormat",""],["EnUsVoices",""],["Region",""],["SilenceAttributeType",""],["Style",""],["TtsError",""],["VoiceGender",""],["VoiceSegment",""]],"struct":[["Speak",""],["VoiceDescription",""],["VoiceService",""],["VoiceSettings",""]]};

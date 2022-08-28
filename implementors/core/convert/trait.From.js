@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["azure_tts"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.63.0/core/convert/trait.From.html\" title=\"trait core::convert::From\">From</a>&lt;<a class=\"struct\" href=\"https://docs.rs/reqwest/0.11.11/reqwest/error/struct.Error.html\" title=\"struct reqwest::error::Error\">Error</a>&gt; for <a class=\"enum\" href=\"azure_tts/enum.TtsError.html\" title=\"enum azure_tts::TtsError\">TtsError</a>","synthetic":false,"types":["azure_tts::error::TtsError"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
